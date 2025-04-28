@@ -26,14 +26,17 @@ class URLMap(db.Model):
         """Метод создает словарь из атрибутов объекта."""
         return dict(
             url=self.original,
-            short_link=url_for("redirect_short_url", url=self.short, _external=True),
+            short_link=url_for("redirect_short_url",
+                               url=self.short, _external=True),
         )
 
     @staticmethod
     def get_unique_short_id():
         """Метод создает уникальную короткую ссылку."""
         while True:
-            short_url = "".join(random.choices(population=STR_FOR_GEN_URL, k=6))
+            short_url = "".join(random.choices(
+                population=STR_FOR_GEN_URL, k=6)
+            )
             if URLMap.query.filter_by(short=short_url).first() is None:
                 return short_url
 
