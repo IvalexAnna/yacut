@@ -27,7 +27,8 @@ class URLMap(db.Model):
         """Метод создает словарь из атрибутов объекта."""
         return {
             "url": self.original,
-            "short_link": url_for("redirect_short_url", url=self.short, _external=True),
+            "short_link": url_for("redirect_short_url",
+                                  url=self.short, _external=True),
         }
 
     @staticmethod
